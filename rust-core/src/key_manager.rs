@@ -6,6 +6,7 @@ use std::sync::Arc;
 #[derive(uniffi::Enum)]
 pub enum KeyAlgorithm {
     Secp256k1,
+    Secp256r1,
     Ed25519,
 }
 
@@ -28,6 +29,9 @@ impl KeyManager {
         match key_algorithm {
             KeyAlgorithm::Secp256k1 => {
                 jwk = JWK::generate_secp256k1().unwrap();
+            }
+            KeyAlgorithm::Secp256r1 => {
+                jwk = JWK::generate_p256().unwrap();
             }
             KeyAlgorithm::Ed25519 => {
                 jwk = JWK::generate_ed25519().unwrap();
