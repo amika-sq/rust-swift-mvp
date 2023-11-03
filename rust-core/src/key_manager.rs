@@ -1,4 +1,4 @@
-use crate::KeyStore;
+use crate::key_store::KeyStore;
 
 use ssi_jwk::JWK;
 use std::sync::Arc;

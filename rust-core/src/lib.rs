@@ -4,5 +4,3 @@ mod did;
 mod jwk;
 mod key_manager;
 mod key_store;
-
-use crate::key_store::KeyStore;
