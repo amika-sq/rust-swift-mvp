@@ -15,7 +15,11 @@ struct ContentView: View {
       Button("Test") {
         let keyStore = SwiftKeyStore()
         let keyManager = KeyManager(keyStore: keyStore)
-        let did = createDid(keyManager: keyManager, didMethod: .key)
+        let did = createDid(
+          keyManager: keyManager,
+          didMethod: .key,
+          keyAlgorithm: .secp256k1
+        )
         print("did uri: \(did.uri)")
       }
     }

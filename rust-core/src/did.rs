@@ -16,12 +16,16 @@ pub struct Did {
 }
 
 #[uniffi::export]
-pub fn create_did(key_manager: Arc<KeyManager>, did_method: DidMethod) -> Did {
+pub fn create_did(
+    key_manager: Arc<KeyManager>,
+    did_method: DidMethod,
+    key_algorithm: KeyAlgorithm,
+) -> Did {
     let uri: String;
 
     match did_method {
         DidMethod::Key => {
-            let jwk = key_manager.generate_private_key(KeyAlgorithm::Ed25519);
+            let jwk = key_manager.generate_private_key(key_algorithm);
             uri = DIDKey.generate(&Source::Key(&jwk)).unwrap();
         }
     }
