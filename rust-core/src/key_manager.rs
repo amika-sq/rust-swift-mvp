@@ -3,20 +3,26 @@ use crate::KeyStore;
 use ssi_jwk::JWK;
 use std::sync::Arc;
 
-pub struct KeyManager {
-    key_store: Arc<dyn KeyStore>,
-}
-
+#[derive(uniffi::Enum)]
 pub enum KeyAlgorithm {
     Secp256k1,
     Ed25519,
 }
 
-impl KeyManager {
-    pub fn new(key_store: Arc<dyn KeyStore>) -> Self {
-        Self { key_store }
-    }
+#[derive(uniffi::Object)]
+pub struct KeyManager {
+    key_store: Arc<dyn KeyStore>,
+}
 
+#[uniffi::export]
+impl KeyManager {
+    #[uniffi::constructor]
+    pub fn new(key_store: Arc<dyn KeyStore>) -> Arc<Self> {
+        Self { key_store }.into()
+    }
+}
+
+impl KeyManager {
     pub fn generate_private_key(&self, key_algorithm: KeyAlgorithm) -> JWK {
         let jwk: JWK;
         match key_algorithm {
@@ -35,14 +41,6 @@ impl KeyManager {
 
         jwk
     }
-
-    // fn get_public_key(&self, alias: &str) -> Option<JWK> {
-    //     let jwk = self
-    //         .key_store
-    //         .get(alias.to_string())
-    //         .unwrap()
-    //         .unwrap_or_else(None);
-    // }
 
     fn get_alias(key: &JWK) -> String {
         key.thumbprint().unwrap()

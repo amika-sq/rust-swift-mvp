@@ -9,6 +9,10 @@ edition = "2021"
 crate-type = ["lib", "cdylib", "staticlib"]
 name = "rust_core"
 
+[[bin]]
+name = "uniffi-bindgen"
+path = "uniffi-bindgen.rs"
+
 [dependencies]
 did-method-key = { version = "0.2.2", features = ["secp256k1"] }
 serde_json = "1.0.108"
@@ -18,7 +22,7 @@ thiserror = "1.0.50"
 
 # Point to 0.25.1 when available
 # More info here: https://github.com/mozilla/uniffi-rs/issues/1804
-uniffi = { git = "https://github.com/mozilla/uniffi-rs.git", rev = "39fc189c2e4b2441efd0198e2e99ec894c8332d0" }
+uniffi = { git = "https://github.com/mozilla/uniffi-rs.git", rev = "39fc189c2e4b2441efd0198e2e99ec894c8332d0", features = ["cli"] }
 
 [build-dependencies]
 uniffi = { git = "https://github.com/mozilla/uniffi-rs.git", rev = "39fc189c2e4b2441efd0198e2e99ec894c8332d0", features= ["build"] }

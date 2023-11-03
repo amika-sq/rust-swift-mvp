@@ -3,11 +3,7 @@ use ssi_jwk::JWK;
 
 pub struct Jwk(pub JWK);
 
-impl Jwk {
-    pub fn get_jwk(&self) -> &JWK {
-        &self.0
-    }
-}
+uniffi::custom_type!(Jwk, String);
 
 impl UniffiCustomTypeConverter for Jwk {
     type Builtin = String;

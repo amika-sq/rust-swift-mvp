@@ -14,8 +14,11 @@ TARGET_ARCHES=(
     aarch64-apple-ios-sim
 )
 
-# Build the library to create bindings
-cargo build
+# Build the library
+cargo build --release
+
+# Generate the bindings
+cargo run --bin uniffi-bindgen generate --library target/release/librust_core.rlib --language swift --out-dir "$BINDINGS_DIR"
 
 for arch in "${TARGET_ARCHES[@]}"; do
     # Add the target arch via rustup (if needed)
