@@ -9,7 +9,7 @@ struct ContentView: View {
 
   var body: some View {
     VStack {
-      Text("Rusty Rollercoaster").font(.title)
+      Text("Rust Swift MVP").font(.title)
       Text(value != nil ? String(value!) : "")
 
       Button("Test") {
@@ -19,7 +19,7 @@ struct ContentView: View {
           keyManager: keyManager,
           didMethod: .key,
           keyAlgorithm: .secp256k1
-        )
+      )
         print("did uri: \(did.uri)")
       }
     }
